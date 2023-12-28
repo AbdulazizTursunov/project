@@ -1,4 +1,8 @@
-import 'expo.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:project/bottom_nav_bar/basket/basket_screen.dart';
+import 'package:project/bottom_nav_bar/home/home_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -8,59 +12,39 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  static List<Widget> screens = [];
 
-  @override
-  void initState() {
-    screens = <Widget>[
-      const HomePage(),
-      const BasketPage(),
-      const SearchPage(),
-    ];
-    super.initState();
-  }
+int index=0;
+   List<Widget> screens = [
+  HomePage(),
+  BasketPage(),
+  ];
+
+   List<Widget> items=[
+     Icon(Icons.home_outlined),
+     Icon(Icons.shopping_basket_outlined),
+   ];
+
+final itemS =[
+  Icon(Icons.home_outlined,size: 30.h,),
+  Icon(Icons.shopping_basket_outlined,size: 30.h,),
+];
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      body: IndexedStack(
-        index: context.watch<TabCubit>().state,
-        children: screens,
-      ),
-      bottomNavigationBar: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(16),
-          topRight: Radius.circular(16),
-        ),
-        child: BottomNavigationBar(
-          currentIndex: context.watch<TabCubit>().state,
-          onTap: context.read<TabCubit>().changeTabIndex,
-          selectedLabelStyle: const TextStyle(
-            fontSize: 10,
-            fontWeight: FontWeight.w700,
-            color: Colors.purple,
-            height: 12 / 10,
-          ),
-          unselectedLabelStyle: const TextStyle(
-            fontSize: 10,
-            fontWeight: FontWeight.w500,
-            color: Colors.purple,
-            height: 12 / 10,
-          ),
-          type: BottomNavigationBarType.shifting,
-          elevation: 10,
-          backgroundColor: Colors.blue,
-          selectedItemColor: Colors.purple,
-          unselectedItemColor: Colors.pink,
-          items: const [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined), label: 'home'),
-            BottomNavigationBarItem(icon: Icon(Icons.search), label: 'search'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_basket_outlined), label: 'basket'),
-          ],
-        ),
-      ),
+      extendBodyBehindAppBar: true  ,
+      body: screens[index],
+      extendBody: true,
+      bottomNavigationBar: CurvedNavigationBar(
+          height: 50,
+          onTap: (index)=> setState(()=> this.index =index),
+          index: index,
+          backgroundColor: Colors.transparent,
+          color: Colors.blue,
+          buttonBackgroundColor: Colors.purple,
+          items: itemS),
     );
   }
 }
+

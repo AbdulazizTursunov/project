@@ -18,6 +18,9 @@ dependencies:
 #  sqflite: ^2.3.0
 #  path: ^1.8.3
   flutter_screenutil: ^5.9.0
+  cached_network_image: ^3.3.0
+  curved_navigation_bar: ^1.0.3
+  zoom_tap_animation: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -43,4 +46,10 @@ flutter:
       fonts:
         - asset: assets/fonts/Rosarivo-Regular.ttf
         - asset: assets/fonts/Rosarivo-Italic.ttf
-
+    - family: Quicksand
+      fonts:
+        - asset: assets/fonts/Quicksand-Regular.ttf
+        - asset: assets/fonts/Quicksand-Bold.ttf
+        - asset: assets/fonts/Quicksand-Light.ttf
+        - asset: assets/fonts/Quicksand-Medium.ttf
+        - asset: assets/fonts/Quicksand-SemiBold.ttf
