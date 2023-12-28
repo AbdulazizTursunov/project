@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:project/bottom_nav_bar/home/sub_screen/filter_screen.dart';
 import 'package:project/data/model/expo.dart';
 import 'package:project/extension/extension_size.dart';
 import 'package:project/widgets/constant/constant_fields.dart';
@@ -25,9 +27,9 @@ class _HomePageState extends State<HomePage> {
   void _filterProductName(String searchField) {
     List<ProductInfo> results = [];
     if (searchField.isEmpty) {
-      results = filterProduct;
+      results = products;
     } else {
-      results = filterProduct
+      results = products
           .where((element) =>
               element.name.toLowerCase().contains(searchField.toLowerCase()))
           .toList();
@@ -41,9 +43,9 @@ class _HomePageState extends State<HomePage> {
   void _filterProductBarCode(String searchField) {
     List<ProductInfo> results = [];
     if (searchField.isEmpty) {
-      results = filterProduct;
+      results = products;
     } else {
-      results = filterProduct
+      results = products
           .where(
             (element) => element.barcode
                 .toLowerCase()
@@ -75,7 +77,8 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {setState(() {
+          });},
           icon: Icon(Icons.sort, size: 30.h),
         ),
         title: Text(
@@ -88,8 +91,10 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.search_sharp, size: 25.h),
+            onPressed: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const FilterScreen(),));
+            },
+            icon: Icon(Icons.manage_search_outlined, size: 25.h),
           ),
           IconButton(
             onPressed: () {},
@@ -103,8 +108,10 @@ class _HomePageState extends State<HomePage> {
           children: [
             TextField(
               onChanged: (value) {
+              setState(() {
                 _filterProductName(value);
-                _filterProductBarCode(value);
+                // _filterProductBarCode(value);
+              });
               },
               controller: textEditingController,
               decoration: InputDecoration(
@@ -129,29 +136,32 @@ class _HomePageState extends State<HomePage> {
                     icon: Icon(
                       Icons.clear_sharp,
                       size: 20.h,
-                    ),
-                  )),
+                    ),)),
             ),
             15.ph,
             Expanded(
+              child: SizedBox(
+                height: 100,
                 child: ListView.builder(
-              padding: EdgeInsets.only(left: 5.w),
-              itemCount: filterProduct.length,
-              itemBuilder: (context, index) {
+                  shrinkWrap: true,
+                              padding: EdgeInsets.only(left: 5.w),
+                              itemCount: filterProduct.length,
+                              itemBuilder: (context, index) {
                 ProductInfo productInfo = filterProduct[index];
                 return Column(
                   children: [
                     Container(
                       margin: EdgeInsets.symmetric(vertical: 5.w),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(16.r),
                           border: Border.all(color: Colors.yellow, width: 1.5),
                           color: Colors.white),
                       child: ListTile(
-                        leading: Image.network(
-                          productInfo.image,
+                        leading: SizedBox(
                           height: 80,
                           width: 50,
+                          child: Image(image: NetworkImage(productInfo.image),
+                          ),
                         ),
                         title: Row(
                           children: [
@@ -210,8 +220,10 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 );
-              },
-            )),
+                              },
+                            ),
+              ),
+            ),
             60.ph
           ],
         ),

@@ -91,7 +91,7 @@ List<ProductInfo> products = [
       price: 40,
       article: 'juG%!m594fg',
       barcode: '568912345',
-      brend: 'BATZ & BODY WORKS',
+      brend: 'BODY WORKS',
       department: 'Dream Bright perfume',
       measure: '5',
       image:

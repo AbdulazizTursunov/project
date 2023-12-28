@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AddBasketWidget extends StatelessWidget {
-  const AddBasketWidget({super.key, required this.callback});
+class ResultFilterWidget extends StatelessWidget {
+  const ResultFilterWidget({super.key, required this.callback});
 
   final VoidCallback callback;
 
@@ -24,13 +24,15 @@ class AddBasketWidget extends StatelessWidget {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 9),
-            child: Text(
-              'Savat',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleSmall!
-                  .copyWith(color: Colors.white, fontWeight: FontWeight.w500),
+            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+            child: Center(
+              child: Text(
+                'Result Items',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(color: Colors.white, fontWeight: FontWeight.w500),
+              ),
             ),
           ),
         ),
